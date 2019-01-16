@@ -22,14 +22,20 @@ trait StringMessages {
 
 trait Util {
   lazy val transalate = TranslateOptions.getDefaultInstance.getService
-  @throws(classOf[TranslateException])
-  @throws(classOf[GoogleJsonResponseException])
   def fromSourceToTarget(text:String): Translation = {
-    transalate.translate(
-      text,
-      TranslateOption.sourceLanguage("es"),
-      TranslateOption.targetLanguage("en")
-    )
+    var translationDone : Translation = null
+    try {
+      translationDone = transalate.translate(
+        text,
+        TranslateOption.sourceLanguage("es"),
+        TranslateOption.targetLanguage("en")
+      )
+    } catch {
+      case te: TranslateException =>
+        println("ouch!")
+        System.exit(0)
+    }
+    translationDone
   }
 
 }
