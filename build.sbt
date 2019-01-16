@@ -11,4 +11,4 @@ lazy val root = (project in file(".")).
     libraryDependencies += scalaTest % Test
 )
 
-libraryDependencies += "com.google.cloud" % "google-cloud-translate" % "1.59.0"
+libraryDependencies += gct
